@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link href="https://www.svgrepo.com/show/243730/qr-code.svg" rel="icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+
+<!--Here starts the menu-->
+<div class="container">
+  <div class="text-center mt-3">
+    <h1>QR Code Generator</h1>
+  </div>
+  <div class="row">
+    <div class="col mt-5">
+      <button type="button" class="btn btn-outline-success w-75 mt-5"  data-bs-toggle="modal" data-bs-target="#QRModal"  >
+          <img src="https://www.svgrepo.com/show/451215/qr-code.svg" alt="qr-icon" srcset="" class="w-25">
+          QR Code Generator - URL 
+        </button>
+
+        <button type="button" class="btn btn-outline-info w-75 mt-3" data-bs-toggle="modal" data-bs-target="#Modalvcard"  >
+          <img src="https://www.svgrepo.com/show/269009/qr-code-scan.svg" alt="qr-icon-Vcard" srcset="" class="w-25">
+          QR Code Generator - VCard
+        </button>
+
+        <button type="button" class="btn btn-outline-dark w-75 mt-3" data-bs-toggle="modal" data-bs-target="#Artistic_modal"  >
+          <img src="https://www.svgrepo.com/show/491890/qr-code.svg" alt="qr-icon-art" srcset="" class="w-25">
+          QR Code Generator - Artistic
+        </button>
+        
+        <a href="{{ url_for('home_qr') }}"  class="btn btn-danger w-25 mt-5">Reset</a>
+
+    </div>
+    
+
+    <div class="col mt-5">
+        {% if qr_image%}
+      <h5 class="mt-4">Your QR Code:</h5>
+     <div class="row ">
+      <div class="text-center mt-3">
+        <img src="{{ url_for('static', filename=qr_image) }}" alt="QR Code" class="w-75 ">
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="text-center">
+        <a href="{{ url_for('static', filename=qr_image) }}"  class="btn btn-success">View QR</a>
+        <button type="button" class="rounded-pill bg-warning" data-bs-toggle="tooltip" title="If you want to generate another QR code, press the 'Reset' button!">?</button>
+      </div>
+
+    </div>
+     {% endif %}
+  
+     <div class="col mt-5">
+      {% if file_name%}
+      <h5 class="mt-4">Your QR Code:</h5>
+      <div class="row">
+        <div class="text-center mt-3">
+          <img src="{{ url_for('static', filename=file_name) }}" alt="QR Code" class="w-75 ">
+        </div>
+      </div>
+      
+      <div class="row mt-3">
+        <div class="text-center">
+          <a href="{{ url_for('static', filename=file_name) }}"  class="btn btn-primary">View QR</a>
+          <button type="button" class=" rounded-pill bg-warning" data-bs-toggle="tooltip" title="If you want to generate another QR code, press the 'Reset' button!">?</button>
+        </div>
+      </div>
+   {% endif %}
+
+   <div class="col mt-5">
+    {% if file_name_art%}
+    <h5 class="mt-4">Your QR Code:</h5>
+     <div class="row">
+       <div class="text-center mt-3">
+         <img src="{{ url_for('static', filename=file_name_art) }}" alt="QR Code image" class="w-75 ">
+       </div>
+   </div>
+   
+   <div class="row mt-3">
+     <div class="text-center">
+       <a href="{{ url_for('static', filename=file_name_art) }}"  class="btn btn-info">View QR</a>
+       <button type="button" class=" rounded-pill bg-warning" data-bs-toggle="tooltip" title="If you want to generate another QR code, press the 'Reset' button!">?</button>
+     </div>
+   </div>
+   {% endif %}
+   </div>
+  </div>
+  </div>
+  </div>
+</div>
+<!--The menu ends here-->
+
+
+  <!-- Modal 1 -->
+<div class="modal fade" id="QRModal" tabindex="-1" aria-labelledby="QRModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header ">
+          <h5 class="modal-title" id="QRModalLabel">URL</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form  action="{{ url_for('home_qr') }}" method="post">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="url_field">Any text or URL: </label>
+                <input type="text" class="form-control" id="url_field" name="url_field" placeholder="URL" required>
+              </div>
+
+              <div class="row mt-3">
+                    <div class="form-group  col">
+                        <label for="scale_field">Add a scale from 1 - 10: </label>
+                        <input type="number" class="form-control" id="scale_field" name="scale_field" placeholder="Scale" max="10" min="1" required>
+                    </div>
+    
+                    <div class="form-group  col">
+                        <label for="border_field">Add a border size from 1 - 10: </label>
+                        <input type="number" class="form-control" id="border_field" name="border_field" placeholder="Border" max="10" min="1" required >
+                    </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="form-group  col">
+                    <label for="color_field">Choose a background color: </label>
+                    <input type="color" class="form-control" id="color_field" name="color_field" placeholder="" required >
+                </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" value="Generate">
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!--Modal 2-->
+<div class="modal fade" id="Modalvcard">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">VCard</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form  method="post" action="{{ url_for('Vcard') }}">
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="name_field">Full Name: </label>
+            <input type="text" class="form-control" id="name_field" name="name_field" placeholder="Name here" required>
+          </div>
+          
+
+          <div class="form-group mt-3">
+            <label for="title_field">Title: </label>
+            <input type="text" class="form-control" id="title_field" name="title_field" placeholder="Name here">
+          </div>
+
+          <div class="row mt-3">
+            <div class="form-group  col">
+                <label for="email_field">Email: </label>
+                <input type="email" class="form-control" id="email_field" name="email_field" placeholder="Email"  required>
+            </div>
+
+            <div class="form-group  col">
+                <label for="mobile_field">Phone mobile: </label>
+                <input type="text" class="form-control" id="mobile_field" name="mobile_field" placeholder="Mobile"  required >
+            </div>
+
+          </div>
+
+          <div class="row mt-3">
+            <div class="form-group  col">
+              <label for="address_field">Address: </label>
+              <input type="text" class="form-control" id="address_field" name="address_field" placeholder="Address"  required >
+            </div>
+
+            <div class="form-group  col">
+                <label for="scale_card">Add a scale from 1 - 10: </label>
+                <input type="number" class="form-control" id="scale_card" name="scale_card" placeholder="Scale" max="10" min="1" >
+            </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="form-group  col">
+          <label for="border_card" >Add a border size from 1 - 10: </label>
+          <input type="number" class="form-control" id="border_card" name="border_card" placeholder="Border" max="10" min="1"  >
+      </div>
+
+        <div class="form-group  col">
+            <label for="color_card" >Choose a background color: </label>
+            <input type="color" class="form-control" id="color_card" name="color_card" placeholder="" required >
+        </div>
+      </div>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Generate">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--Modal 3-->
+<div class="modal fade" id="Artistic_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Artisitc QR</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form  method="post" action="{{ url_for('artCard') }}" >
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="artistic_url">URL or text: </label>
+            <input type="text" class="form-control" id="artistic_url" name="artistic_url" placeholder="URL or any text" required>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="artistic_background">Background image: </label>
+            <input type="text" class="form-control" id="artistic_background" name="artistic_background" placeholder="Background url image" required>
+          </div>
+
+          <div class="row mt-3">
+
+            <div class="form-group  col">
+              <label for="artistic_scale">Add a scale from 1 - 10: </label>
+              <input type="number" class="form-control" id="artistic_scale" name="artistic_scale" placeholder="Scale" max="10" min="1" required >
+          </div>
+
+            <div class="form-group  col">
+              <label for="artistic_border" >Add a border size from 1 - 10: </label>
+              <input type="number" class="form-control" id="artistic_border" name="artistic_border" placeholder="Border" max="10" min="1" required >
+          </div>
+   
+      </div>
+
+      <div class="row mt-3">
+
+        <div class="form-group  col">
+            <label for="artistic_color" >Choose a background color: </label>
+            <input type="color" class="form-control" id="artistic_color" name="artistic_color" placeholder="" required >
+        </div>
+      </div>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Generate">
+
+        
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // To enable all tooltips in this HTML file
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+  </script>
+
+  </body>
+</html>
