@@ -5,8 +5,9 @@ QR Code generator with diferent type of data: URL or text, Personal card informa
 ## Features
 
 - **QR Code with URL or some text.**: The `home_qr` function generates a QR code with the URL, scale, border, and background color given by the user.
-- ** QR code which encodes contact information.**: The `Vcard()` generates a QR code with the full name, title, email, phone mobile, scale, border, and background color given by the user.
+- **QR code which encodes contact information.**: The `Vcard()` generates a QR code with the full name, title, email, phone mobile, scale, border, and background color given by the user.
 - **Create animated QR codes.**: The `artCard()` generates a QR animated code with the URL, background image, scale, border, and background color given by the user.
+- **Folder images.** The QR codes generated are saved in the 'static' folder.
 
 
 ## Installation
