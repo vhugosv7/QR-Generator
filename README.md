@@ -1,5 +1,5 @@
 # QR Code Generator deploy
-QR Code generator with diferent type of data: URL or text, Personal card information and Artistic QR Code.
+QR code generator with different types of data: URL or text, personal card information, and artistic QR codes. This version includes a new artistic QR method that allows the user to select a logo from a list due to access to external internet sites limitation. This project is hosted on PythonAnywhere. Visit https://vhugosv7.pythonanywhere.com/
 
 
 ## Features
