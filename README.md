@@ -1,4 +1,4 @@
-# QR Code Generator
+# QR Code Generator deploy
 QR Code generator with diferent type of data: URL or text, Personal card information and Artistic QR Code.
 
 
