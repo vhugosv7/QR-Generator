@@ -66,12 +66,14 @@ Follow the steps below to set up and run this project locally.
 
 
 
-* **Artistic QR Code**
+* **Artistic logo QR Code**
   
-  ![artistic QR](https://github.com/user-attachments/assets/2d0598bd-7432-45d4-b808-2a896039b795)
+  ![logoQR](https://github.com/user-attachments/assets/1988ea1d-3e12-4ade-a52c-b0de60575f09)
 
-  **Artistic QR Code result**
-  ![result artistic](https://github.com/user-attachments/assets/3dd667dd-843f-468d-a610-078b7af2feef)
+
+  **Artistic logo QR Code result**
+ ![logoqr_result](https://github.com/user-attachments/assets/0620359b-5718-481a-a8ee-7b1be357223a)
+
 
   
 
