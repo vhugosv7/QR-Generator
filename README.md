@@ -20,6 +20,7 @@ Follow the steps below to set up and run this project locally.
 - segno 1.6.6
 - Python 3.11.7
 - Bootstrap 5.02
+- Pillow 11.2.1
 
 ### Steps
 
