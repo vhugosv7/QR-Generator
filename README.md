@@ -1,5 +1,6 @@
 # QR Code Generator
-QR Code generator with diferent type of data: URL or text, Personal card information and Artistic QR Code.
+QR Code generator with diferent type of data: URL or text, Personal card information and Artistic QR Code.<br>
+Visit here: https://vhugosv7.pythonanywhere.com/
 
 
 ## Features
